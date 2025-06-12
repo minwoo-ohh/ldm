@@ -231,6 +231,28 @@ will only happen if neither a folder
 if you want to force running the dataset preparation again.
 
 
+### Shoeprint dataset
+Organize paired images as:
+```
+data/shoeprint/
+├── footprint/
+│   ├── 0001.jpg
+│   └── ...
+└── sole/
+    ├── 0001.jpg
+    └── ...
+```
+Each file in `footprint/` must have a corresponding mask in `sole/` with the same filename.
+
+To train the model run
+```bash
+python main.py --base models/ldm/shoeprint_ldm/config.yaml -t --gpus <n>
+```
+To sample from a checkpoint use
+```bash
+python scripts/sole2footprint.py --config models/ldm/shoeprint_ldm/config.yaml --ckpt <path> --indir <sole_dir>
+```
+
 ## Model Training
 
 Logs and checkpoints for trained models are saved to `logs/<START_DATE_AND_TIME>_<config_spec>`.
